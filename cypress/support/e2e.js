@@ -19,6 +19,8 @@ import '../components/api/wait-api-response-status-code'
 import 'cypress-network-idle'
 import '../components/api/post-asset-api'
 import '../components/api/post-create-asset-api'
+import '../components/api/post-create-policy-api'
+import '../components/api/post-policies-api'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
