@@ -21,6 +21,11 @@ import '../components/api/post-asset-api'
 import '../components/api/post-create-asset-api'
 import '../components/api/post-create-policy-api'
 import '../components/api/post-policies-api'
+import '../components/api/get-risk-form-api'
+import '../components/api/post-risk-api'
+import '../components/api/post-create-risk-api'
+import '../components/api/get-evidences-api'
+import '../components/api/post-create-evidence-api'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

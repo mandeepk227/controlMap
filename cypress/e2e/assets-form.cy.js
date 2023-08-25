@@ -21,19 +21,9 @@ describe('assets form fill', () => {
   });
 
   it('test', () => {
-    cy.get('#sidebar').contains('Assets').click();
+    cy.selectApp('Assets')
     cy.waitApiResponseStatusCode('@postApiAssets', 200);
-    cy.get('app-custom-action-dropdown button.btn').click();
-    cy.get('ul.anchor-list').find('li').contains('Asset').click({force:true});
-    cy.get('[formcontrolname="assetName"] input').clear().type(assetDetails.name);
-    cy.get('[formcontrolname="description"] textarea').clear().type(assetDetails.desciption);
-    cy.get('app-cm-dropdown').first().as('assetStatus');
-    cy.get('app-cm-dropdown').eq(1).as('assetType');
-    cy.get('@assetStatus').click()
-    cy.get('@assetStatus').find('.dropdown-list').contains(assetDetails.status).click();
-    cy.get('@assetType').click();
-    cy.get('@assetType').find('.dropdown-list').contains(assetDetails.type).click();
-    cy.get('button.btn-primary').contains('Save').click();
+    cy.assetFormFill(assetDetails)
     cy.wait('@postApiCreateAssets').then(($asset)=> {
       expect($asset.response.statusCode).to.equal(200)
       assetID = $asset.response.body.id
