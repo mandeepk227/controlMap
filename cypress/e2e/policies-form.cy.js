@@ -15,22 +15,12 @@ describe('policies form fill', () => {
     cy.visit('/')
     cy.waitForNetworkIdle('GET', '**', 2000)
     cy.login(userName, password)
-    
   });
 
   it('test', () => {
-    cy.get('#sidebar').contains('Policies').click();
+    cy.selectApp('Policies')
     cy.waitApiResponseStatusCode('@postApiPolicies', 200);
-    cy.get('app-custom-action-dropdown button.btn').click();
-    cy.get('ul.anchor-list').find('li').contains('Add Policy').click({force:true});
-    cy.get('[formcontrolname="policyName"] input').clear().type(policyDetails.name);
-    cy.get('.sidebar .dropdown-div').eq(0).as('firstDropdown');
-    cy.get('@firstDropdown').click();
-    cy.get('@firstDropdown').parent().find('ul li').contains(policyDetails.how).click();
-    cy.get('.sidebar .dropdown-div').eq(1).as('secondDropdown');
-    cy.get('@secondDropdown').click();
-    cy.get('@secondDropdown').parent().find('ul li').contains(policyDetails.select).click();
-    cy.get('button.btn-primary').contains('Save').click();
+    cy.policyFormFill(policyDetails)
     cy.wait('@postApiCreatePolicy').then(($asset)=> {
       expect($asset.response.statusCode).to.equal(200)
       assetID = $asset.response.body.id
